@@ -36,4 +36,11 @@ explore:  glew_shopify_sales_over_time {
       and ${dim_shopify_base_products.base_product_id} = ${glew_shopify_sales_over_time.base_product_id}  ;;
     type: left_outer
   }
+  join: fact_shopify_order_items {
+    relationship: one_to_one
+    sql_on: ${fact_shopify_order_items.glew_account_id} = ${glew_shopify_sales_over_time.glew_account_id}
+      and ${fact_shopify_order_items.order_id} = ${glew_shopify_sales_over_time.order_id}
+      and ${fact_shopify_order_items.line_item_id} = ${glew_shopify_sales_over_time.line_item_id};;
+    type:  left_outer
+  }
 }
